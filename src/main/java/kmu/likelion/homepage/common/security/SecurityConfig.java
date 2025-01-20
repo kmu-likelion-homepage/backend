@@ -1,5 +1,6 @@
 package kmu.likelion.homepage.common.security;
 
+import kmu.likelion.homepage.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final MemberService memberService;
     @Value("${spring.jwt.secretKey}")
     private String secretKey;
 
