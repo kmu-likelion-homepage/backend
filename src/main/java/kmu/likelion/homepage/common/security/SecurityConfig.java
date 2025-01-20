@@ -45,4 +45,5 @@ public class SecurityConfig {
                         // 모든 요청에 대해서 인증을 요구
                         .anyRequest().authenticated())
                 .build();
+    }
 }
