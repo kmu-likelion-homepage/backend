@@ -34,12 +34,16 @@ public class Member extends BaseEntity {
     private String password;
 
     @NotBlank
-    private String phone_number;
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 
-    @Column(nullable = false)
-    private LocalDate birth_date;
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
+
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
 }
