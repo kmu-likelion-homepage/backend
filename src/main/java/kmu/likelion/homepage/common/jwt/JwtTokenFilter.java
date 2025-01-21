@@ -1,4 +1,4 @@
-package kmu.likelion.homepage.common.security;
+package kmu.likelion.homepage.common.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

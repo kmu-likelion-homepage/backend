@@ -1,5 +1,6 @@
 package kmu.likelion.homepage.common.security;
 
+import kmu.likelion.homepage.common.jwt.JwtTokenFilter;
 import kmu.likelion.homepage.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .headers(headers -> headers.frameOptions().disable()) // h2 테스트용
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())) // h2 테스트용
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtTokenFilter(memberService, secretKey), UsernamePasswordAuthenticationFilter.class)
@@ -39,11 +40,12 @@ public class SecurityConfig {
                                 "/api/member/find-account",
                                 "/api/member/send-verification",
                                 "/api/member/logout",
-                                "/h2-console"
+                                "/h2-console/**"
                         ).permitAll()
 
                         // 모든 요청에 대해서 인증을 요구
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                )
                 .build();
     }
 }
