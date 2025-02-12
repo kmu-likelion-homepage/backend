@@ -1,4 +1,4 @@
-package kmu.likelion.homepage.common.config;
+package kmu.likelion.homepage.s3.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
