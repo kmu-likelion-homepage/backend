@@ -40,7 +40,8 @@ public class SecurityConfig {
                                 "/api/member/find-account",
                                 "/api/member/send-verification",
                                 "/api/member/logout",
-                                "/h2-console/**"
+                                "/h2-console/**",
+                                "/api/post/**"
                         ).permitAll()
 
                         // 모든 요청에 대해서 인증을 요구

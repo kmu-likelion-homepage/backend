@@ -9,13 +9,16 @@ import kmu.likelion.homepage.common.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Post")
 @Getter
+@Setter
 @SuperBuilder(toBuilder = true)
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "post_type")
@@ -47,5 +50,5 @@ public class Post extends BaseEntity {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PostImage> postImages;
+    private List<PostImage> postImages = new ArrayList<>();
 }

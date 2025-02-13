@@ -30,7 +30,6 @@ public class S3Service {
                         .bucket(bucketName)
                         .key(fileName)
                         .contentType(file.getContentType())
-                        .acl(ObjectCannedACL.PUBLIC_READ) // 퍼블릭 권한
                         .build(),
                 RequestBody.fromBytes(file.getBytes()));
 

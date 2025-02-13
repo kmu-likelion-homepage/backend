@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,32 +28,10 @@ public class PostService {
     private final PostImageRepository postImageRepository;
     private final S3Service s3Service;
 
-    public List<PostListResponseDTO> getAllPost(GetAllRequestDTO req){
-        PostType postType = PostType.valueOf(req.getType().toUpperCase());
+    public List<Post> getAllPost(short semester, String type){
+        PostType postType = PostType.valueOf(type.toUpperCase());
 
-        List<PostListResponseDTO> posts = postRepository.findAllBySemesterAndType(req.getSemester(), postType).stream()
-                .map(post -> {
-                    if (postType==PostType.PROJECT) {
-                        return PostListResponseDTO.builder()
-                                .post_id(post.getId())
-                                .type(post.getType())
-                                .semester(post.getSemester())
-                                .title(post.getTitle())
-                                .award(post.getAward())
-                                .competitionName(post.getCompetitionName())
-                                .build();
-                    } else if (postType==PostType.ACTIVITY) {
-                        return PostListResponseDTO.builder()
-                                .post_id(post.getId())
-                                .type(post.getType())
-                                .semester(post.getSemester())
-                                .title(post.getTitle())
-                                .subtitle(post.getSubtitle())
-                                .build();
-                    }
-                    return null;
-                }).collect(Collectors.toList());
-        return posts;
+        return postRepository.findAllBySemesterAndType(semester, postType);
     }
 
     @Transactional
@@ -68,6 +47,10 @@ public class PostService {
                 .build();
 
         Post savePost = postRepository.save(post);
+
+        if(savePost.getPostImages() == null){
+            savePost.setPostImages(new ArrayList<>());
+        }
 
         if (files != null && !files.isEmpty()) {
             List<PostImage> postImages = files.stream()
