@@ -4,6 +4,8 @@ import kmu.likelion.homepage.post.entity.ActivityPost;
 import kmu.likelion.homepage.post.entity.Post;
 import kmu.likelion.homepage.post.entity.PostType;
 import kmu.likelion.homepage.post.entity.ProjectPost;
+import kmu.likelion.homepage.post.entity.dto.req.CreatePostRequsetDTO;
+import kmu.likelion.homepage.post.entity.dto.req.GetAllRequestDTO;
 import kmu.likelion.homepage.post.entity.dto.res.PostListResponseDTO;
 import kmu.likelion.homepage.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,10 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
 
-    @Transactional
-    public List<PostListResponseDTO> getAllPost(short semester, String type){
-        PostType postType = PostType.valueOf(type.toUpperCase());
+    public List<PostListResponseDTO> getAllPost(GetAllRequestDTO req){
+        PostType postType = PostType.valueOf(req.getType().toUpperCase());
 
-        List<PostListResponseDTO> posts = postRepository.findAllBySemesterAndType(semester, postType).stream()
+        List<PostListResponseDTO> posts = postRepository.findAllBySemesterAndType(req.getSemester(), postType).stream()
                 .map(post -> {
                     if (post instanceof ProjectPost) {
                         ProjectPost project = (ProjectPost) post;
@@ -49,5 +50,11 @@ public class PostService {
                     return null;
                 }).collect(Collectors.toList());
         return posts;
+    }
+
+    @Transactional
+    public String createPost(CreatePostRequsetDTO req){
+        PostType postType = PostType.valueOf(req.getType().toUpperCase());
+
     }
 }

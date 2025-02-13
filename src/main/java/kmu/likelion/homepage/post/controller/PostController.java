@@ -24,7 +24,7 @@ public class PostController {
             ResponseEntity.badRequest();
         }
 
-        return ResponseEntity.ok(postService.getAllPost(req.getSemester(), req.getType()));
+        return ResponseEntity.ok(postService.getAllPost(req));
     }
 
 }
