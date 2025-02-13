@@ -38,6 +38,13 @@ public class Post extends BaseEntity {
     @NotBlank
     private String title;
 
+    private String subtitle;
+
+    private String award;
+
+    @Column(name = "competition_name")
+    private String competitionName;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostImage> postImages;
