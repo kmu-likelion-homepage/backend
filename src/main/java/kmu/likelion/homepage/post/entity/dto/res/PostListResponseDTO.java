@@ -10,16 +10,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostListResponseDTO {
-    @NotNull
+
+    @NotNull(message = "게시물 id가 비어있습니다.")
     private Long post_id;
 
-    @NotBlank
+    @NotBlank(message = "게시물 유형이 비어있습니다.")
     private PostType type;
 
-    @NotNull
+    @NotNull(message = "기수가 비어있습니다.")
     private short semester;
 
-    @NotBlank
+    @NotBlank(message = "제목이 비어있습니다.")
     private String title;
 
     private String award;
