@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ActivityPost extends Post {
 
-    private String award;
+    private String subtitle;
 }

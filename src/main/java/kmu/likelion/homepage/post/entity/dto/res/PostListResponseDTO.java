@@ -3,16 +3,15 @@ package kmu.likelion.homepage.post.entity.dto.res;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import kmu.likelion.homepage.post.entity.PostType;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostListResponseDTO {
     @NotNull
-    private String post_id;
+    private Long post_id;
 
     @NotBlank
     private PostType type;
