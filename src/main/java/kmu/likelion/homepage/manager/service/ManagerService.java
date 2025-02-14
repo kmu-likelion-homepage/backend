@@ -25,12 +25,12 @@ public class ManagerService {
     @Transactional
     public String createManager(CreateManagerRequestDTO req, MultipartFile image){
         try {
-            Part part = Part.valueOf(req.getPart().toUpperCase());
+            Part part = Part.fromString(req.getPart().toUpperCase());
             String imageUrl = s3Service.uploadFile(image);
             managerRepository.save(Manager.builder()
                     .name(req.getName())
                     .major(req.getMajor())
-                    .part(part)
+                    .part(part.getValue())
                     .imageUrl(imageUrl).build());
             return "운영진 등록 성공";
         } catch (IOException e) {
