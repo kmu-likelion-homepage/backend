@@ -8,6 +8,7 @@ import kmu.likelion.homepage.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class ManagerService {
     private final ManagerRepository managerRepository;
     private final S3Service s3Service;
 
+    @Transactional
     public String createManager(CreateManagerRequestDTO req, MultipartFile image){
         try {
             Part part = Part.valueOf(req.getPart().toUpperCase());
