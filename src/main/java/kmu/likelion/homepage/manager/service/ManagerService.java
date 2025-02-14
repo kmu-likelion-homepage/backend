@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @Primary
@@ -33,5 +34,9 @@ public class ManagerService {
         } catch (IOException e) {
             throw new RuntimeException("파일 업로드 중 오류 발생",e);
         }
+    }
+
+    public List<Manager> getAllManager(){
+        return managerRepository.findAll();
     }
 }
