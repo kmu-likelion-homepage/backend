@@ -25,8 +25,11 @@ public class ManagerService {
     @Transactional
     public String createManager(CreateManagerRequestDTO req, MultipartFile image){
         try {
+            String imageUrl = null;
+            if (!image.isEmpty()){
+                imageUrl = s3Service.uploadFile(image);
+            }
             Part part = Part.fromString(req.getPart().toUpperCase());
-            String imageUrl = s3Service.uploadFile(image);
             managerRepository.save(Manager.builder()
                     .name(req.getName())
                     .major(req.getMajor())
