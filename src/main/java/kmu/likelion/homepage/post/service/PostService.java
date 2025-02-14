@@ -4,8 +4,6 @@ import kmu.likelion.homepage.post.entity.Post;
 import kmu.likelion.homepage.post.entity.PostImage;
 import kmu.likelion.homepage.post.entity.PostType;
 import kmu.likelion.homepage.post.entity.dto.req.CreatePostRequsetDTO;
-import kmu.likelion.homepage.post.entity.dto.req.GetAllRequestDTO;
-import kmu.likelion.homepage.post.entity.dto.res.PostListResponseDTO;
 import kmu.likelion.homepage.post.repository.PostImageRepository;
 import kmu.likelion.homepage.post.repository.PostRepository;
 import kmu.likelion.homepage.s3.service.S3Service;

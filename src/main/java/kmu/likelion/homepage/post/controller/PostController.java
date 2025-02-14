@@ -3,8 +3,6 @@ package kmu.likelion.homepage.post.controller;
 import jakarta.validation.Valid;
 import kmu.likelion.homepage.post.entity.Post;
 import kmu.likelion.homepage.post.entity.dto.req.CreatePostRequsetDTO;
-import kmu.likelion.homepage.post.entity.dto.req.GetAllRequestDTO;
-import kmu.likelion.homepage.post.entity.dto.res.PostListResponseDTO;
 import kmu.likelion.homepage.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
