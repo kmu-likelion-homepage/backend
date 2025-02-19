@@ -46,7 +46,7 @@ public class SecurityConfig {
                                 "/api/manager/**"
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
-
+                        .requestMatchers("/api/manager/**").hasAnyRole(Role.MANAGER.name(), Role.ADMIN.name())
                         // 모든 요청에 대해서 인증을 요구
                         .anyRequest().authenticated()
                 )

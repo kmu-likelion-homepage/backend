@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import kmu.likelion.homepage.common.domain.BaseEntity;
+import kmu.likelion.homepage.common.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +33,10 @@ public class Member extends BaseEntity {
 
     @NotBlank
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @NotBlank
     @Column(name = "phone_number", nullable = false)
