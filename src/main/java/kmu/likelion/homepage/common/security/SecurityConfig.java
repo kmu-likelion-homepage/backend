@@ -1,6 +1,7 @@
 package kmu.likelion.homepage.common.security;
 
 import kmu.likelion.homepage.common.jwt.JwtTokenFilter;
+import kmu.likelion.homepage.common.role.Role;
 import kmu.likelion.homepage.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +45,7 @@ public class SecurityConfig {
                                 "/api/post/**",
                                 "/api/manager/**"
                         ).permitAll()
+                        .requestMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
 
                         // 모든 요청에 대해서 인증을 요구
                         .anyRequest().authenticated()

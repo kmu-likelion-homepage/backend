@@ -4,16 +4,20 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kmu.likelion.homepage.common.role.Role;
 import kmu.likelion.homepage.member.entity.Member;
 import kmu.likelion.homepage.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
@@ -43,11 +47,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
 
         String email = JwtTokenUtil.getEmail(token, secretKey);
+        Role role = JwtTokenUtil.getRole(token, secretKey);
+
+        GrantedAuthority authority = new SimpleGrantedAuthority(role.getAuthority());
 
         Member memberByEmail = memberService.getMemberByEmail(email).orElse(null);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                memberByEmail.getEmail(),null, null);
+                memberByEmail.getEmail(),null, List.of(authority));
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
