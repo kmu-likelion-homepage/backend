@@ -30,6 +30,7 @@ dependencies {
 
 	// 스프링 시큐리티
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-web'
 
 	// 이메일 전송
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
