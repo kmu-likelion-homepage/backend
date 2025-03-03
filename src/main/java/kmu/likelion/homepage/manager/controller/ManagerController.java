@@ -28,4 +28,10 @@ public class ManagerController {
                                                 @RequestPart("image")MultipartFile image){
         return ResponseEntity.ok(managerService.createManager(req, image));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteManager(@PathVariable Long id){
+
+        return ResponseEntity.ok("Manager deleted");
+    }
 }
