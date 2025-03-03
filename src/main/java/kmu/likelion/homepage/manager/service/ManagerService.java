@@ -7,12 +7,14 @@ import kmu.likelion.homepage.manager.repository.ManagerRepository;
 import kmu.likelion.homepage.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Primary
@@ -43,5 +45,12 @@ public class ManagerService {
 
     public List<Manager> getAllManager(){
         return managerRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteManager(Long id){
+        Optional<Manager> manager = managerRepository.findById(id);
+        manager.ifPresent(managerRepository::delete);
+        ResponseEntity.badRequest();
     }
 }
