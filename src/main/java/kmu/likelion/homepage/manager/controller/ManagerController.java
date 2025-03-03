@@ -31,7 +31,7 @@ public class ManagerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteManager(@PathVariable Long id){
-
+        managerService.deleteManager(id);
         return ResponseEntity.ok("Manager deleted");
     }
 }
